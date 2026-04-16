@@ -1,4 +1,4 @@
-// src/context/AuthContext.jsx - Global auth state management
+// src/context/AuthContext.jsx
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { authAPI } from '../services/api';
 
@@ -12,11 +12,36 @@ export const AuthProvider = ({ children }) => {
       return null;
     }
   });
-  const [loading, setLoading] = useState(false);
 
-  const token = localStorage.getItem('token');
-  const isAuthenticated = !!user && !!token;
+  // ← true on startup so ProtectedRoute waits before deciding
+  const [loading, setLoading] = useState(true);
+
+  const isAuthenticated = !!user && !!localStorage.getItem('token');
   const isAdmin = user?.role === 'admin';
+
+  // ← verify token is still valid on every page load/refresh
+  useEffect(() => {
+    const verifyAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const { data } = await authAPI.getProfile();
+        setUser(data.user);
+      } catch {
+        // token expired or invalid — clean up
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyAuth();
+  }, []);
 
   const login = async (email, password) => {
     setLoading(true);
