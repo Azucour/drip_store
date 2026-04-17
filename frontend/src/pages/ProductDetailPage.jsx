@@ -78,13 +78,13 @@ export default function ProductDetailPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-        <Link to="/" className="hover:text-white transition-colors">Home</Link>
+        <Link to="/" className="hover:text-gray-900">Home</Link>
         <span>/</span>
-        <Link to={`/category/${encodeURIComponent(product.category)}`} className="hover:text-white transition-colors">
+        <Link to={`/category/${encodeURIComponent(product.category)}`} className="hover:text-gray-900">
           {product.category}
         </Link>
         <span>/</span>
-        <span className="text-gray-300">{product.name}</span>
+        <span className="text-gray-700">{product.name}</span>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-12">
@@ -121,9 +121,9 @@ export default function ProductDetailPage() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-primary-400 text-sm font-medium mb-1">{product.category}</p>
-              <h1 className="font-display text-3xl font-bold text-white">{product.name}</h1>
+              <h1 className="font-display text-3xl font-bold text-gray-900">{product.name}</h1>
             </div>
-            <button className="p-2 text-gray-400 hover:text-white border border-white/10 rounded-lg transition-colors mt-1">
+            <button className="p-2 text-gray-500 hover:text-gray-900 border border-gray-200 rounded-lg transition-colors mt-1">
               <FiShare2 size={16} />
             </button>
           </div>
@@ -142,7 +142,7 @@ export default function ProductDetailPage() {
 
           {/* Price */}
           <div className="flex items-center gap-3 mt-5">
-            <span className="font-display text-4xl font-bold text-white">
+            <span className="font-display text-4xl font-bold text-gray-900">
               ₹{price.toLocaleString('en-IN')}
             </span>
             {discountPct > 0 && (
@@ -166,12 +166,12 @@ export default function ProductDetailPage() {
             )}
           </div>
 
-          <hr className="border-white/10 my-6" />
+        <hr className="border-gray-200 my-6" />
 
           {/* Size selection */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <label className="text-sm font-semibold text-white">Select Size</label>
+              <label className="text-sm font-semibold text-gray-600">Select Size</label>
               <button className="text-xs text-primary-400 hover:text-primary-300">Size Guide</button>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -189,18 +189,16 @@ export default function ProductDetailPage() {
 
           {/* Quantity */}
           <div className="mb-6">
-            <label className="text-sm font-semibold text-white mb-3 block">Quantity</label>
+            <label className="text-sm font-semibold text-gray-900 mb-3 block">Quantity</label>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="w-10 h-10 rounded-lg border border-white/10 text-white hover:border-primary-500 transition-all text-lg font-bold"
-              >
-                −
+                className="w-10 h-10 rounded-lg border border-gray-300 text-gray-900 hover:border-primary-500">                −
               </button>
-              <span className="w-12 text-center text-white font-semibold text-lg">{quantity}</span>
+              <span className="w-12 text-center text-gray-900 font-semibold text-lg">{quantity}</span>
               <button
                 onClick={() => setQuantity((q) => Math.min(product.stock, q + 1))}
-                className="w-10 h-10 rounded-lg border border-white/10 text-white hover:border-primary-500 transition-all text-lg font-bold"
+                className="w-10 h-10 rounded-lg border border-gray-300 text-gray-900 hover:border-primary-500"
               >
                 +
               </button>
@@ -219,7 +217,7 @@ export default function ProductDetailPage() {
 
           {/* Description */}
           <div className="mt-8">
-            <h3 className="text-sm font-semibold text-white mb-3">About this product</h3>
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">About this product</h3>
             <p className="text-gray-400 text-sm leading-relaxed">{product.description}</p>
           </div>
 
@@ -237,7 +235,7 @@ export default function ProductDetailPage() {
         {/* Submit review */}
         {isAuthenticated && (
           <form onSubmit={handleReviewSubmit} className="card p-6 mb-8">
-            <h3 className="font-semibold text-white mb-4">Write a Review</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">Write a Review</h3>
             <div className="flex gap-2 mb-4">
               {[1,2,3,4,5].map((s) => (
                 <button key={s} type="button" onClick={() => setReviewRating(s)}>

@@ -38,7 +38,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md animate-slide-up">
         <div className="text-center mb-8">
           <Link to="/" className="font-display text-4xl font-black">
-            DRIP<span className="text-primary-500">.</span>
+            Lxry_Street<span className="text-primary-500">.</span>
           </Link>
           <p className="text-gray-500 mt-2 text-sm">Create your account</p>
         </div>

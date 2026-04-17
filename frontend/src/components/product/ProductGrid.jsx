@@ -23,7 +23,7 @@ export default function ProductGrid({ products, loading, columns = 4 }) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="text-5xl mb-4">🔍</div>
-        <h3 className="text-xl font-semibold text-white mb-2">No products found</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
         <p className="text-gray-500">Try adjusting your filters or search terms</p>
       </div>
     );
