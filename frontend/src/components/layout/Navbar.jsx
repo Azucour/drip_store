@@ -174,18 +174,37 @@ export default function Navbar() {
               />
             </form>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col gap-2">
               {CATEGORIES.map((cat) => (
                 <Link
                   key={cat}
                   to={`/category/${encodeURIComponent(cat)}`}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm text-gray-600 hover:text-gray-900 py-2 px-3 rounded-lg hover:bg-gray-100 transition-colors"
-                >
+                  className="text-sm text-gray-700 hover:text-gray-900 py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
                   {cat}
                 </Link>
               ))}
             </div>
+            <div className="mt-6 pt-4 border-t border-gray-200 flex items-center justify-between">
+  
+  <span className="text-sm text-gray-600">Follow us</span>
+
+  <a
+    href="https://www.instagram.com/Causeway_Collection"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-sm text-gray-900 hover:text-blue-600 transition-colors"
+  >
+    <img
+      src="https://logodix.com/logo/1049852.png"
+      alt="profile"
+      className="w-6 h-6 rounded-full"
+    />
+    @Causeway_Collection
+  </a>
+
+</div>
 
           </div>
         </div>
