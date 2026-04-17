@@ -67,7 +67,7 @@ export default function CheckoutPage() {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: 'Drip Store',
+        name: 'Lxry_street Store',
         description: `Order for ${items.length} item(s)`,
         order_id: orderData.orderId,
         prefill: {

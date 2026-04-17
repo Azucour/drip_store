@@ -26,7 +26,7 @@ export default function SignupPage() {
     }
     const result = await signup(form.name, form.email, form.password);
     if (result.success) {
-      toast.success('Welcome to Drip Store! 🎉');
+      toast.success('Welcome to Lxry_Street Store! 🎉');
       navigate('/');
     } else {
       toast.error(result.message);
