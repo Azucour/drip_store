@@ -22,6 +22,29 @@ export default function ProductDetailPage() {
   const [reviewRating, setReviewRating] = useState(5);
   const [submitting, setSubmitting] = useState(false);
 
+  const handleShare = async () => {
+  if (!product) return;
+
+  const shareUrl = window.location.href;
+
+  const shareData = {
+    title: product?.name || 'Product',
+    text: `Check out this product: ${product?.name || ''}`,
+    url: shareUrl,
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success('Link copied! 🚀');
+    }
+  } catch {
+    toast.error('Sharing failed');
+  }
+};
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -123,9 +146,12 @@ export default function ProductDetailPage() {
               <p className="text-primary-400 text-sm font-medium mb-1">{product.category}</p>
               <h1 className="font-display text-3xl font-bold text-gray-900">{product.name}</h1>
             </div>
-            <button className="p-2 text-gray-500 hover:text-gray-900 border border-gray-200 rounded-lg transition-colors mt-1">
-              <FiShare2 size={16} />
-            </button>
+            <button
+            onClick={handleShare}
+            className="p-2 text-gray-500 hover:text-gray-900 border border-gray-200 rounded-lg transition-colors mt-1"
+          >
+            <FiShare2 size={16} />
+          </button>
           </div>
 
           {/* Rating */}
