@@ -35,9 +35,13 @@ import AdminInventory   from './pages/admin/AdminInventory';
 import ProtectedRoute   from './routes/ProtectedRoute';
 import AdminRoute       from './routes/AdminRoute';
 
+// Scroll to top on every navigation
+import ScrollToTop      from './components/common/ScrollToTop';
+
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <CartProvider>
           <Toaster

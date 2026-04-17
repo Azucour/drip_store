@@ -16,24 +16,39 @@ export default {
           800: '#9a3412',
           900: '#7c2d12',
         },
-        dark: '#0f0f0f',
-        card: '#1a1a1a',
+
+        // ❌ removed dark (not needed anymore)
+
+        // ✅ updated card for light UI
+        card: '#ffffff',
+
+        // ✅ new background surface color
+        surface: '#f8f8f6',
       },
+
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
         body: ['"DM Sans"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
+
       animation: {
         'fade-in': 'fadeIn 0.4s ease-out',
         'slide-up': 'slideUp 0.4s ease-out',
         'slide-down': 'slideDown 0.3s ease-out',
         'pulse-once': 'pulse 0.6s ease-in-out 1',
       },
+
       keyframes: {
         fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
-        slideUp: { from: { opacity: 0, transform: 'translateY(20px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
-        slideDown: { from: { opacity: 0, transform: 'translateY(-10px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+        slideUp: {
+          from: { opacity: 0, transform: 'translateY(20px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideDown: {
+          from: { opacity: 0, transform: 'translateY(-10px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
       },
     },
   },

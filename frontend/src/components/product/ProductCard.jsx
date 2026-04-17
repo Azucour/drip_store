@@ -23,11 +23,14 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <Link to={`/product/${product._id}`} className="group card hover:border-white/15 transition-all duration-300">
+    <Link
+      to={`/product/${product._id}`}
+      className="group bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+    >
       {/* Image */}
-      <div className="relative overflow-hidden aspect-square bg-white/5">
+      <div className="relative overflow-hidden aspect-square bg-gray-100">
         <img
-          src={product.images?.[0] || 'https://placehold.co/400x400/1a1a1a/666?text=No+Image'}
+          src={product.images?.[0] || 'https://placehold.co/400x400/e5e7eb/999?text=No+Image'}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
@@ -40,13 +43,15 @@ export default function ProductCard({ product }) {
               -{discountPct}%
             </span>
           )}
+
           {product.stock === 0 && (
-            <span className="badge bg-black/70 text-gray-300 text-xs px-2 py-0.5">
+            <span className="badge bg-gray-800 text-white text-xs px-2 py-0.5">
               Out of Stock
             </span>
           )}
+
           {product.stock > 0 && product.stock <= 5 && (
-            <span className="badge bg-yellow-500/80 text-black text-xs font-semibold px-2 py-0.5">
+            <span className="badge bg-yellow-400 text-black text-xs font-semibold px-2 py-0.5">
               Only {product.stock} left
             </span>
           )}
@@ -56,7 +61,7 @@ export default function ProductCard({ product }) {
         <button
           onClick={handleQuickAdd}
           disabled={product.stock === 0}
-          className="absolute bottom-3 right-3 w-10 h-10 bg-primary-500 hover:bg-primary-400 disabled:bg-gray-700 disabled:cursor-not-allowed text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg"
+          className="absolute bottom-3 right-3 w-10 h-10 bg-primary-500 hover:bg-primary-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-md"
         >
           <FiShoppingCart size={16} />
         </button>
@@ -64,8 +69,11 @@ export default function ProductCard({ product }) {
 
       {/* Info */}
       <div className="p-4">
-        <p className="text-xs text-primary-400 font-medium mb-1">{product.category}</p>
-        <h3 className="text-sm font-semibold text-white line-clamp-1 group-hover:text-primary-300 transition-colors">
+        <p className="text-xs text-primary-500 font-medium mb-1">
+          {product.category}
+        </p>
+
+        <h3 className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-primary-600 transition-colors">
           {product.name}
         </h3>
 
@@ -73,7 +81,7 @@ export default function ProductCard({ product }) {
         {product.numReviews > 0 && (
           <div className="flex items-center gap-1 mt-1">
             <FiStar size={11} className="text-yellow-400 fill-yellow-400" />
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-gray-500">
               {product.rating?.toFixed(1)} ({product.numReviews})
             </span>
           </div>
@@ -81,24 +89,33 @@ export default function ProductCard({ product }) {
 
         {/* Price */}
         <div className="flex items-center gap-2 mt-2">
-          <span className="font-bold text-white">₹{price.toLocaleString('en-IN')}</span>
+          <span className="font-bold text-gray-900">
+            ₹{price.toLocaleString('en-IN')}
+          </span>
+
           {hasDiscount && (
-            <span className="text-xs text-gray-500 line-through">
+            <span className="text-xs text-gray-400 line-through">
               ₹{product.price.toLocaleString('en-IN')}
             </span>
           )}
         </div>
 
-        {/* Sizes preview */}
+        {/* Sizes */}
         {product.sizes?.length > 0 && (
           <div className="flex gap-1 mt-2 flex-wrap">
             {product.sizes.slice(0, 5).map((s) => (
-              <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-white/5 text-gray-500 border border-white/10">
+              <span
+                key={s}
+                className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200"
+              >
                 {s}
               </span>
             ))}
+
             {product.sizes.length > 5 && (
-              <span className="text-xs px-1.5 py-0.5 text-gray-600">+{product.sizes.length - 5}</span>
+              <span className="text-xs px-1.5 py-0.5 text-gray-500">
+                +{product.sizes.length - 5}
+              </span>
             )}
           </div>
         )}
