@@ -21,6 +21,7 @@ export default function CategoryPage() {
   const [products, setProducts]       = useState([]);
   const [pagination, setPagination]   = useState({});
   const [loading, setLoading]         = useState(true);
+  const [fetchError, setFetchError]   = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
   // Filter state
@@ -34,6 +35,7 @@ export default function CategoryPage() {
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
+    setFetchError(false);
     try {
       const params = { category, page, limit: 12, sort };
       if (minPrice) params.minPrice = minPrice;
@@ -45,6 +47,7 @@ export default function CategoryPage() {
       setPagination(data.pagination);
     } catch (err) {
       console.error(err);
+      setFetchError(true);
     } finally {
       setLoading(false);
     }
@@ -169,7 +172,7 @@ export default function CategoryPage() {
       )}
 
       {/* Product grid */}
-      <ProductGrid products={products} loading={loading} />
+      <ProductGrid products={products} loading={loading} error={fetchError} onRetry={fetchProducts} />
 
       {/* Pagination */}
       <Pagination

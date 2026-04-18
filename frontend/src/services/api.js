@@ -1,9 +1,9 @@
-// src/services/api.js - Axios instance with auth interceptor
+// src/services/api.js - Axios instance with auth interceptor + retry on timeout
 import axios from 'axios';
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
-  timeout: 15000,
+  timeout: 30000, // increased to 30s to handle cold starts on free hosting
 });
 
 // Attach JWT token to every request
@@ -18,15 +18,30 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Handle 401 — token expired, force logout
+// Auto-retry once on timeout / network error, then handle 401
 API.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const config = error.config;
+
+    // Retry once on timeout or network error (cold start scenario)
+    if (
+      !config._retried &&
+      (error.code === 'ECONNABORTED' || !error.response)
+    ) {
+      config._retried = true;
+      config.timeout = 40000; // give extra time on retry
+      await new Promise((res) => setTimeout(res, 2000)); // wait 2s then retry
+      return API(config);
+    }
+
+    // Force logout on 401
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );

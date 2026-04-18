@@ -2,13 +2,14 @@
 import ProductCard from './ProductCard';
 import { ProductCardSkeleton } from '../common/index';
 
-export default function ProductGrid({ products, loading, columns = 4 }) {
+export default function ProductGrid({ products, loading, columns = 4, error, onRetry }) {
   const colClass = {
     2: 'grid-cols-1 sm:grid-cols-2',
     3: 'grid-cols-2 sm:grid-cols-3',
     4: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4',
   }[columns] || 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
 
+  // Still loading → show skeleton cards
   if (loading) {
     return (
       <div className={`grid ${colClass} gap-4 md:gap-6`}>
@@ -19,11 +20,28 @@ export default function ProductGrid({ products, loading, columns = 4 }) {
     );
   }
 
+  // Network/timeout error → show retry instead of "no products"
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center">
+        <div className="text-5xl mb-4">⚡</div>
+        <h3 className="text-xl font-semibold text-gray-500 mb-2">Server is waking up…</h3>
+        <p className="text-gray-500 mb-6">This can take a few seconds. Please try again.</p>
+        {onRetry && (
+          <button onClick={onRetry} className="btn-primary">
+            Retry
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  // Genuinely no products (filters applied, empty category etc.)
   if (!products?.length) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="text-5xl mb-4">🔍</div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+        <h3 className="text-xl font-semibold text-white mb-2">No products found</h3>
         <p className="text-gray-500">Try adjusting your filters or search terms</p>
       </div>
     );
