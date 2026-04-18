@@ -30,7 +30,9 @@ export default function CartPage() {
       <div className="flex items-center justify-between mb-8">
         <h1 className="section-title text-black">Your Cart</h1>
 
-        <button className="text-sm text-red-500 hover:text-red-600 transition-colors">
+        <button
+          onClick={clearCart}
+          className="text-sm text-red-500 hover:text-red-600 transition-colors">
           Clear cart
         </button>
       </div>
@@ -79,13 +81,20 @@ export default function CartPage() {
               {/* Quantity + Remove */}
               <div className="flex flex-col items-end gap-3">
 
-                <button className="text-gray-500 hover:text-red-500 transition-colors">
+                <button
+                  onClick={() => removeFromCart(item.key)}
+                  className="text-gray-500 hover:text-red-500 transition-colors"
+                >
                   <FiTrash2 size={16} />
                 </button>
 
                 <div className="flex items-center gap-2">
 
-                  <button className="w-7 h-7 rounded border border-gray-300 text-black text-sm hover:border-black">
+                  <button
+                    onClick={() => updateQuantity(item.key, item.quantity - 1)}
+                    disabled={item.quantity <= 1}
+                    className="w-7 h-7 rounded border border-gray-300 text-black text-sm hover:border-black disabled:opacity-40"
+                  >
                     −
                   </button>
 
@@ -93,7 +102,10 @@ export default function CartPage() {
                     {item.quantity}
                   </span>
 
-                  <button className="w-7 h-7 rounded border border-gray-300 text-black text-sm hover:border-black">
+                  <button
+                    onClick={() => updateQuantity(item.key, item.quantity + 1)}
+                    className="w-7 h-7 rounded border border-gray-300 text-black text-sm hover:border-black"
+                  >
                     +
                   </button>
 

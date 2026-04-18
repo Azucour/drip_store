@@ -163,7 +163,10 @@ export default function Navbar() {
         <div className="lg:hidden bg-white border-t border-gray-200 animate-slide-down min-h-screen">
           <div className="px-4 py-3">
 
-            <form onSubmit={handleSearch} className="flex items-center bg-white border border-gray-300 rounded-lg px-3 py-2 gap-2 mb-4">
+            <form onSubmit={(e) => {
+                handleSearch(e);
+                setMobileOpen(false);
+              }} className="flex items-center bg-white border border-gray-300 rounded-lg px-3 py-2 gap-2 mb-4">
               <FiSearch className="text-gray-500" />
               <input
                 type="text"
@@ -179,7 +182,10 @@ export default function Navbar() {
                 <Link
                   key={cat}
                   to={`/category/${encodeURIComponent(cat)}`}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                      setMobileOpen(false);
+                      setSearchQuery('');
+                    }}
                   className="text-sm text-gray-700 hover:text-gray-900 py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                   {cat}
