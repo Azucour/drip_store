@@ -8,8 +8,8 @@ export default function OrderFailurePage() {
       <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
         <FiXCircle size={40} className="text-red-400" />
       </div>
-      <h1 className="font-display text-4xl font-bold text-white mb-3">Payment Failed</h1>
-      <p className="text-gray-400 mb-8">
+      <h1 className="font-display text-4xl font-bold text-black mb-3">Payment Failed</h1>
+      <p className="text-gray-600 mb-8">
         Your payment could not be processed. No amount has been charged.
         Please try again or use a different payment method.
       </p>

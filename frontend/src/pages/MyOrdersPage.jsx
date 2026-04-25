@@ -46,7 +46,7 @@ export default function MyOrdersPage() {
                   <p className="text-sm font-mono text-gray-500 truncate">#{order._id.slice(-8).toUpperCase()}</p>
                   <StatusBadge status={order.orderStatus} />
                 </div>
-                <p className="text-white font-medium line-clamp-1">
+                <p className="text-black font-medium line-clamp-1">
                   {order.items?.map((i) => i.name).join(', ')}
                 </p>
                 <p className="text-xs text-gray-500 mt-0.5">
@@ -55,7 +55,7 @@ export default function MyOrdersPage() {
               </div>
 
               <div className="text-right flex-shrink-0">
-                <p className="font-bold text-white">₹{order.totalAmount?.toLocaleString('en-IN')}</p>
+                <p className="font-bold text-black">₹{order.totalAmount?.toLocaleString('en-IN')}</p>
                 <p className="text-xs text-gray-600 mt-0.5">
                   <StatusBadge status={order.paymentStatus} />
                 </p>

@@ -47,7 +47,7 @@ export default function OrderTrackingPage() {
 
       {/* Timeline */}
       <div className="card p-6 mb-6">
-        <h2 className="font-semibold text-white mb-6">Order Timeline</h2>
+        <h2 className="font-semibold text-black mb-6">Order Timeline</h2>
         <div className="relative">
           {/* Connector line */}
           <div className="absolute left-5 top-5 bottom-5 w-0.5 bg-white/10" />
@@ -69,7 +69,7 @@ export default function OrderTrackingPage() {
                     <Icon size={16} />
                   </div>
                   <div className="pt-1.5">
-                    <p className={`font-semibold text-sm ${isDone ? 'text-white' : 'text-gray-600'}`}>
+                    <p className={`font-semibold text-sm ${isDone ? 'text-gray-400' : 'text-gray-600'}`}>
                       {step.label}
                     </p>
                     <p className={`text-xs mt-0.5 ${isDone ? 'text-gray-400' : 'text-gray-700'}`}>
@@ -95,30 +95,30 @@ export default function OrderTrackingPage() {
       {/* Order Details */}
       <div className="grid sm:grid-cols-2 gap-6">
         <div className="card p-5">
-          <h3 className="font-semibold text-white mb-4">Items Ordered</h3>
+          <h3 className="font-semibold text-black mb-4">Items Ordered</h3>
           <div className="space-y-3">
             {order.items?.map((item, i) => (
               <div key={i} className="flex items-center gap-3">
                 <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover bg-white/5" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white line-clamp-1">{item.name}</p>
+                  <p className="text-sm font-medium text-black line-clamp-1">{item.name}</p>
                   <p className="text-xs text-gray-500">Size: {item.size} · Qty: {item.quantity}</p>
                 </div>
-                <p className="text-sm font-semibold text-white">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
+                <p className="text-sm font-semibold text-black">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
               </div>
             ))}
           </div>
           <hr className="border-white/10 my-4" />
-          <div className="flex justify-between text-sm font-bold text-white">
+          <div className="flex justify-between text-sm font-bold text-black">
             <span>Total Paid</span>
             <span>₹{order.totalAmount?.toLocaleString('en-IN')}</span>
           </div>
         </div>
 
         <div className="card p-5">
-          <h3 className="font-semibold text-white mb-4">Delivery Address</h3>
-          <div className="text-sm text-gray-400 space-y-1">
-            <p className="text-white font-medium">{order.shippingAddress?.fullName}</p>
+          <h3 className="font-semibold text-black mb-4">Delivery Address</h3>
+          <div className="text-sm text-gray-800 space-y-1">
+            <p className="text-black font-medium">{order.shippingAddress?.fullName}</p>
             <p>{order.shippingAddress?.street}</p>
             <p>{order.shippingAddress?.city}, {order.shippingAddress?.state}</p>
             <p>Pincode: {order.shippingAddress?.pincode}</p>
